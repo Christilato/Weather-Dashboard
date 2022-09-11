@@ -11,10 +11,13 @@ WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 
 1. Open webpage
-2. Visuall see Weather Dashboard 
+2. Visually see Weather Dashboard 
 
     - search for the city
     -city comes up with the current weather
     -underneath it displays the 5-Day forecast
 
-3. 
+3. Save searches of city 
+4. Add in Icons for weather conditions, temperature, humidity, wind speed, & UV
+5. UV Index needs to be color coded based on favorable, moderate, and severe
+
