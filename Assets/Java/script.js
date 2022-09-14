@@ -33,7 +33,6 @@ searchBtnEl.on("click", function (e) {
 
 
 
-
 // function to display the search history list
     //(for loop)start at end of search history array
     // create a button for those items
@@ -74,8 +73,7 @@ function updateHistory (){
 }
 
 
-// function to get search history from local storage
-    //localStorage.getItem(SearchHistory)
+
 
 
 // function that displays the current weather data that is fecthed from the curren weather api
