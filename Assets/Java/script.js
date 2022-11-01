@@ -13,23 +13,17 @@ var todayContainerEl = $("#today");
 var forecastContainerEl = $("#forecast");
 var searchHistoryContainerEl = $("#history");
 
-
-
-
 dayjs.extend(window.dayjs_plugin_utc);
 dayjs.extend(window.dayjs_plugin_timezone);
 
-
-
 // Event Listeners
-    
 searchBtnEl.on("click", function (e) {
     e.preventDefault();
     city = $("#searchInputEl").val();
 
     console.log(searchInputEl);
      
-})
+});
 
 function displayHistory () {
 searchHistoryContainerEl.on("click", function (event) {
@@ -41,7 +35,7 @@ for (var i = 0; i > searchInputEl.length; i++) {
     cityButton.attr("data", searchInputEl);
     searchHistoryContainerEl.append(cityButton);
 }
-}
+};
 
 function updateHistory (){
     var previousCity = JSON.parse(localStorage.getItem("cities"));
@@ -55,7 +49,7 @@ function updateHistory (){
     localStorage.setItem("cities", JSON.stringify(searchHistoryArr));
   
 
-}
+};
 
 
 function currentWeathData (city, weather, timezone) {
@@ -118,7 +112,7 @@ function currentWeathData (city, weather, timezone) {
     todayContainerEl.innerHTML = "";
     todayContainerEl.append(card);
 
-}
+};
   
 function forecastData (city, weather, timezone) {
     var date = dayjs().tz(timezone).format('M/D/YYYY');
@@ -180,14 +174,14 @@ function forecastData (city, weather, timezone) {
     todayContainerEl.innerHTML = "";
     todayContainerEl.append(card); 
 
-}
+};
 
 
 
 function renderItems (city, data) {
     currentWeathData(city, data.current, data.timezone);
     forecastData(data.daily, data.timezone);
-}
+};
 
 
 function getData (location){
@@ -209,7 +203,7 @@ function getData (location){
         console.error(err);
     })
     
-}
+};
 
 function fetchCoords(search){
     var apiUrl = `${rootUrl}/geo/1.0/direct?q=${search}&limit=5&appid=${APIKey}`;
@@ -229,7 +223,7 @@ function fetchCoords(search){
     .catch(function(err){
         console.error(err);
     })
-}
+};
 
 function handleSearchFormSubmit(e) {
     // Don't continue if there is nothing in the search form
@@ -241,7 +235,7 @@ function handleSearchFormSubmit(e) {
     var search = searchInputEl.value.trim();
     fetchCoords(search);
     searchInputEl.value = '';
-  }
+  };
   
   function handleSearchHistoryClick(e) {
     // Don't do search if current elements is not a search history button
@@ -252,4 +246,4 @@ function handleSearchFormSubmit(e) {
     var btn = e.target;
     var search = btn.getAttribute('data-search');
     fetchCoords(search);
-  }
+  };
