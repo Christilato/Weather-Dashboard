@@ -26,7 +26,7 @@ for (var i = searchHistoryArr.length -1 ; i >= 0 ; i--) {
     cityButton.classList.add("history-btn", "btn");
     cityButton.setAttribute("data-search", searchHistoryArr[i]);
     cityButton.textContent= searchHistoryArr[i];
-    searchHistoryContainerEl.append(cityButton);
+    searchHistoryContainerEl.appendChild(cityButton);
 }
 };
 
@@ -69,7 +69,7 @@ function currentWeathData (city, weather) {
 
     card.setAttribute("class", "card");
     cardBody.setAttribute("class", "card-body");
-    card.append(cardBody);
+    card.appendChild(cardBody);
 
     heading.setAttribute("class", "h2 card-title")
     tempEl.setAttribute("class", "card-text");
@@ -79,13 +79,13 @@ function currentWeathData (city, weather) {
     heading.textContent = `${city} (${date})`;
     weatherIcon.setAttribute("src", weatherIconLink);
     weatherIcon.setAttribute("alt", iconDescription);
-    heading.append(weatherIcon);
+    heading.appendChild(weatherIcon);
 
     tempEl.textContent = `Temp: ${temp}F`;
     windEl.textContent = `Wind: ${wind}mph`;
     humidityEl.textContent = `Humidity: ${humidity}%`;
 
-    cardBody.append(heading, tempEl, windEl, humidityEl);
+    cardBody.appendChild(heading, tempEl, windEl, humidityEl);
 
     UvEl.textContent = "UV Index: ";
     uviBadge.classList.add("btn", "btn-sm");
@@ -99,25 +99,26 @@ function currentWeathData (city, weather) {
     }
 
     uviBadge.textContent = UvIndex;
-    UvEl.append(uviBadge);
+    UvEl.appendChild(uviBadge);
 
-    cardBody.append(UvEl);
+    cardBody.appendChild(UvEl);
 
     //clears out the city
     todayContainerEl.innerHTML = "";
-    todayContainerEl.append(card);
+    todayContainerEl.appendChild(card);
 
 };
   
 function forecastData (forecast) {
     // var date = dayjs().tz(timezone).format('M/D/YYYY');
-        
-    var tempForecast = forecast.temp;
-    var windForecast = forecast.wind_speed;
-    var humidityForecast = forecast.humidity;
-    var UvIndexForecast = forecast.uvi;
-    // var iconDescriptionForecast = forecast.weather[0].description;
-    // var weatherIconLinkForecast = `https://openweathermap.org/img/w/${forecast.weather[0].icon}.png`;
+    console.log(forecast[0]);   
+    var tempForecast = forecast[0].main.temp;
+    console.log(tempForecast);
+    var windForecast = forecast[0].wind.speed;
+    var humidityForecast = forecast[0].main.humidity;
+    var UvIndexForecast = "4";
+    var iconDescriptionForecast = forecast[0].weather[0].description;
+    var weatherIconLinkForecast = `https://openweathermap.org/img/w/${forecast[0].weather[0].icon}.png`;
 
     var cardForecast = document.createElement("div");
     var cardBodyForecast = document.createElement("div");
@@ -131,7 +132,7 @@ function forecastData (forecast) {
 
     cardForecast.setAttribute("class", "card-forecast");
     cardBodyForecast.setAttribute("class", "card-body-forecast");
-    cardForecast.append(cardBodyForecast);
+    cardForecast.appendChild(cardBodyForecast);
 
     headingForecast.setAttribute("class", "h2 card-title")
     tempElForecast.setAttribute("class", "card-text");
@@ -139,10 +140,10 @@ function forecastData (forecast) {
     humidityElForecast.setAttribute("class", "card-text");
 
     headingForecast.textContentForecast = dayjs(forecast.dt_txt).format("M/D/YYYY");
-    // weatherIconForecast.setAttribute("src", weatherIconLinkForecast);
-    // weatherIconForecast.setAttribute("alt", iconDescriptionForecast);
-    // headingForecast.append(weatherIcon);
-
+    weatherIconForecast.setAttribute("src", weatherIconLinkForecast);
+    weatherIconForecast.setAttribute("alt", iconDescriptionForecast);
+    headingForecast.appendChild(weatherIconForecast);
+console.log(tempForecast);
     tempElForecast.textContent = `Temp: ${tempForecast}F`;
     windElForecast.textContent = `Wind: ${windForecast}mph`;
     humidityElForecast.textContent = `Humidity: ${humidityForecast}%`;
@@ -161,13 +162,13 @@ function forecastData (forecast) {
     }
 
     uviBadgeForecast.textContent = UvIndexForecast;
-    UvElForecast.append(uviBadge);
+    UvElForecast.appendChild(uviBadgeForecast);
 
-    cardBodyForecast.append(UvElForecast);
+    cardBodyForecast.appendChild(UvElForecast);
 
-    //clears out the city
+    // clears out the city
     todayContainerEl.innerHTML = "";
-    todayContainerEl.append(card); 
+    todayContainerEl.appendChild(cardBodyForecast); 
 
 };
 
@@ -178,9 +179,9 @@ function renderForecastCards (dailyForecast) {
     var heading = document.createElement("h4");
     headingsCol.setAttribute("class", "col-12");
     heading.textContent= "5 day forecast";
-    headingsCol.append(heading);
+    headingsCol.appendChild(heading);
     forecastContainerEl.innerHTML = "";
-    forecastContainerEl.append(headingsCol);
+    forecastContainerEl.appendChild(headingsCol);
 
     for (var i = 0; i < dailyForecast.length; i++ ) {
         if( dailyForecast[i].dt >= start && dailyForecast[i].dt < end) {
@@ -194,6 +195,7 @@ function renderForecastCards (dailyForecast) {
 function renderItems (city, data) {
     currentWeathData(city, data.list[0], data.city.timezone);
     forecastData(data.list);
+    
 };
 
 
