@@ -1,6 +1,6 @@
 var APIKey = "4691ad58a51757db63d57f20ee381f75";
 var city;
-var rootUrl = "http://api.openweathermap.org";
+var rootUrl = "https://api.openweathermap.org";
 
 //data/2.5/weather?q=" + city + "&appid=" + APIKey;
 
